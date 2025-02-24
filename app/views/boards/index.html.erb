@@ -8,36 +8,55 @@
 
 <hr>
 
-<div>
-  <div>
-    <h2>
-      Add a new board
-    </h2>
+<!-- Button trigger modal -->
 
-    <form action="/insert_board" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name">
+<!-- Modal -->
+<div class="modal fade" id="addBoard" tabindex="-1" aria-labelledby="addBoardLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addBoardLabel">Add a new Board</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <button>
-        Add board
-      </button>
-    </form>
+      <div class="modal-body">
+        <form action="/insert_board" method="post" class="d-flex">
+          <div>
+            <label for="name_box">
+              Name
+            </label>
+            <input type="text" id="name_box" name="query_name">
+          </div>
+          <button class="ms-auto">Add board</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<hr>
-
-<ul>
-  <% @list_of_boards.each do |a_board| %>
-    <li>
-      <a href="/boards/<%= a_board.id %>">
-        <%= a_board.name %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<div class="row col-6 offset-3">
+  <div class="card">
+    <div class="d-flex row mb-3">
+      <div class="col-3">
+        <h2 class="card-title">All Boards</h2>
+      </div>
+      <div class="col-3 ms-auto">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBoard">
+          Add Board
+        </button>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @list_of_boards.each do |a_board| %>
+        <li class="list-group-item">
+          <a href="/boards/<%= a_board.id %>">
+            <%= a_board.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
